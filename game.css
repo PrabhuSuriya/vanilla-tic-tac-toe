@@ -5,17 +5,29 @@ html {
   font-size: 16px;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
-body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
   margin: 0;
   padding: 0;
   font-weight: normal;
 }
 
-ol, ul {
+ol,
+ul {
   list-style: none;
 }
 
@@ -24,6 +36,13 @@ img {
   height: auto;
 }
 /*Reset*/
+.container {
+  display: flex;
+  place-content: center;
+  height: 100vh;
+  place-items: center;
+}
+
 .game-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -32,15 +51,31 @@ img {
   grid-template-areas: ". . ." ". . ." ". . .";
   max-width: 300px;
   max-height: 300px;
+  row-gap: 0;
+  column-gap: 0;
+  margin: 20px;
 }
 
 .game-container .box {
   height: 100px;
   width: 100px;
-  border: 1px solid red;
+  border: 5px solid rgb(29, 27, 27);
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.game-container .box:nth-child(3n) {
+  border-right: 0;
+}
+.game-container .box:nth-child(3n + 1) {
+  border-left: 0;
+}
+.game-container .box:nth-child(-n + 3) {
+  border-top: 0;
+}
+
+.game-container .box:nth-last-child(-n + 3) {
+  border-bottom: 0;
 }
 
 .symbol-o::after {
