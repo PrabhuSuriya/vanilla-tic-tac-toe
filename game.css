@@ -56,6 +56,10 @@ img {
   padding: 0.2em;
 }
 
+.container #player-info{
+  min-height: 1em;
+}
+
 .game-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
