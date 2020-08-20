@@ -11,6 +11,8 @@ const infoEl = document.getElementById("info");
 function setupGame() {
   const boxes = document.querySelectorAll(".box");
   boxes.forEach((box) => box.addEventListener("click", handleBoxClick));
+  const playerInfo = document.getElementById("player-info");
+  playerInfo.innerText = `${players.A.name}: ${players.A.symbol.toUpperCase()} Vs ${players.B.name}: ${players.B.symbol.toUpperCase()} `;
 }
 
 function startGame() {
@@ -138,7 +140,7 @@ function showWinner(status) {
     const w = Object.keys(players).find(
       (p) => players[p].symbol == status.winner
     );
-    showMessage(`Winner is ${players[w].name}`);
+    showMessage(`${players[w].name} wins! 🎉`);
   } else {
     showMessage(`Game drawn!`);
   }
