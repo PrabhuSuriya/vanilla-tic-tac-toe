@@ -41,7 +41,7 @@ function handleBoxClick(e) {
     updateBoardUI(boxId, symbol);
     switchPlayer();
     const status = getGameStatus();
-    if (status) {
+    if (status.isGameOver) {
       showWinner(status);
       toggleGame(false);
       setTimeout(() => {
@@ -82,6 +82,7 @@ function addSymbol(boxId, symbol) {
 function getGameStatus() {
   const result = {
     winner: null,
+    isGameOver: false,
   };
 
   // check rows
@@ -89,6 +90,7 @@ function getGameStatus() {
     const winningSymbol = checkIfSameSymbols(gameBoard[i]);
     if (winningSymbol) {
       result.winner = winningSymbol;
+      result.isGameOver = true;
       return result;
     }
   }
@@ -97,6 +99,7 @@ function getGameStatus() {
     const winningSymbol = checkIfSameSymbols(gameBoard.map((x) => x[i]));
     if (winningSymbol) {
       result.winner = winningSymbol;
+      result.isGameOver = true;
       return result;
     }
   }
@@ -106,6 +109,7 @@ function getGameStatus() {
     const winningSymbol = checkIfSameSymbols(boxesToCheck);
     if (winningSymbol) {
       result.winner = winningSymbol;
+      result.isGameOver = true;
       return result;
     }
   }
@@ -114,9 +118,15 @@ function getGameStatus() {
     const winningSymbol = checkIfSameSymbols(boxesToCheck);
     if (winningSymbol) {
       result.winner = winningSymbol;
+      result.isGameOver = true;
       return result;
     }
   }
+  if (gameBoard.flat().filter((x) => x === null).length == 0) {
+    result.isGameOver = true;
+    return result;
+  }
+  return result;
 }
 
 function checkIfSameSymbols([a, b, c]) {
@@ -124,10 +134,14 @@ function checkIfSameSymbols([a, b, c]) {
 }
 
 function showWinner(status) {
-  const w = Object.keys(players).find(
-    (p) => players[p].symbol == status.winner
-  );
-  showMessage(`Winner is ${players[w].name}`);
+  if (status.winner) {
+    const w = Object.keys(players).find(
+      (p) => players[p].symbol == status.winner
+    );
+    showMessage(`Winner is ${players[w].name}`);
+  } else {
+    showMessage(`Game drawn!`);
+  }
 }
 
 setupGame();
