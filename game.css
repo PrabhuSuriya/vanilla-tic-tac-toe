@@ -68,6 +68,10 @@ img {
   margin: 20px;
 }
 
+.disable-click{
+  pointer-events: none;
+}
+
 .game-container .box {
   height: 100px;
   width: 100px;

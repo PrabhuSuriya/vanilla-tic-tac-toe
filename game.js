@@ -26,7 +26,9 @@ function startGame() {
     box.classList.remove("symbol-x");
   });
   showMessage(`New Game. ${currentPlayer.name}'s playing..`);
+  toggleGame(true);
 }
+
 function showMessage(msg) {
   infoEl.innerText = msg;
 }
@@ -41,10 +43,19 @@ function handleBoxClick(e) {
     const status = getGameStatus();
     if (status) {
       showWinner(status);
+      toggleGame(false);
       setTimeout(() => {
         startGame();
       }, 2000);
     }
+  }
+}
+
+function toggleGame(enable) {
+  if (enable) {
+    document.querySelector(".game-container").classList.remove("disable-click");
+  } else {
+    document.querySelector(".game-container").classList.add("disable-click");
   }
 }
 
