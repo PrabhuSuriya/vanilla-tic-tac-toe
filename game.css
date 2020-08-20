@@ -46,7 +46,13 @@ img {
 
 .container h1 {
   font-size: 4em;
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
+}
+
+.container #info {
+  font-size: 2em;
+  font-family: cursive;
+  padding: 0.2em;
 }
 
 .game-container {
