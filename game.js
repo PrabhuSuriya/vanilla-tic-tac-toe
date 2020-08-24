@@ -7,12 +7,17 @@ const players = {
 let currentPlayer;
 let gameBoard;
 const infoEl = document.getElementById("info");
+const gameOver = document.querySelector(".game-over");
 
 function setupGame() {
   const boxes = document.querySelectorAll(".box");
   boxes.forEach((box) => box.addEventListener("click", handleBoxClick));
   const playerInfo = document.getElementById("player-info");
-  playerInfo.innerText = `${players.A.name}: ${players.A.symbol.toUpperCase()} Vs ${players.B.name}: ${players.B.symbol.toUpperCase()} `;
+  playerInfo.innerText = `${
+    players.A.name
+  }: ${players.A.symbol.toUpperCase()} Vs ${
+    players.B.name
+  }: ${players.B.symbol.toUpperCase()} `;
 }
 
 function startGame() {
@@ -27,6 +32,7 @@ function startGame() {
     box.classList.remove("symbol-o");
     box.classList.remove("symbol-x");
   });
+  gameOver.classList.remove("draw");
   showMessage(`New Game. ${currentPlayer.name}'s playing..`);
   toggleGame(true);
 }
@@ -45,6 +51,7 @@ function handleBoxClick(e) {
     const status = getGameStatus();
     if (status.isGameOver) {
       showWinner(status);
+      drawLine(status);
       toggleGame(false);
       setTimeout(() => {
         startGame();
@@ -85,6 +92,7 @@ function getGameStatus() {
   const result = {
     winner: null,
     isGameOver: false,
+    winningLine: null,
   };
 
   // check rows
@@ -93,6 +101,7 @@ function getGameStatus() {
     if (winningSymbol) {
       result.winner = winningSymbol;
       result.isGameOver = true;
+      result.winningLine = ["r", i];
       return result;
     }
   }
@@ -102,10 +111,11 @@ function getGameStatus() {
     if (winningSymbol) {
       result.winner = winningSymbol;
       result.isGameOver = true;
+      result.winningLine = ["c", i];
       return result;
     }
   }
-  //check diagonal
+  //check diagonals
   {
     const boxesToCheck = gameBoard.map((r, i) => r[i]);
     const winningSymbol = checkIfSameSymbols(boxesToCheck);
@@ -140,9 +150,21 @@ function showWinner(status) {
     const w = Object.keys(players).find(
       (p) => players[p].symbol == status.winner
     );
+
     showMessage(`${players[w].name} wins! 🎉`);
   } else {
     showMessage(`Game drawn!`);
+  }
+}
+
+function drawLine(status) {
+  if (status.winner) {
+    if (status.winningLine[0] == "r") {
+      console.log(`translateY(${ 4.5 + 6 * status.winningLine[1] }em)`)
+      gameOver.style.transform = 
+        `translateY(${ 4.5 + 6 * status.winningLine[1] }em)`;
+      gameOver.classList.add("draw");
+    }
   }
 }
 
