@@ -132,8 +132,7 @@ img {
   border-top: 4px solid red;
   height: 2px;
   width: 0;
-  /* transform: translateY(4.5em); */
-
+  z-index: 2;
   transition: width 1s ease-in-out;
 }
 .game-over.draw {
