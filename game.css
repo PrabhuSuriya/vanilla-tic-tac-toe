@@ -118,6 +118,7 @@ img {
   transform: rotate(-45deg);
   display: inline-block;
   position: absolute;
+  background-color: black;
 }
 
 .symbol-x::after {
@@ -126,6 +127,7 @@ img {
   padding: 2em 0;
   transform: rotate(45deg);
   display: inline-block;
+  background-color: black;
 }
 
 .game-over {
@@ -138,4 +140,9 @@ img {
 }
 .game-over.draw {
   width: 250px;
+}
+
+footer {
+  position: absolute;
+  bottom: .5rem
 }
