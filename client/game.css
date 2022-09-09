@@ -105,7 +105,7 @@ img {
 
 .symbol-o::after {
   content: " ";
-  border: 10px solid black;
+  border: 10px solid #2d7575;
   border-radius: 1000%;
   padding: 1.6em;
   display: inline-block;
@@ -113,7 +113,7 @@ img {
 
 .symbol-x::before {
   content: " ";
-  border: 6px solid black;
+  border: 6px solid #5d5757;
   padding: 2em 0;
   transform: rotate(-45deg);
   display: inline-block;
@@ -123,7 +123,7 @@ img {
 
 .symbol-x::after {
   content: " ";
-  border: 6px solid black;
+  border: 6px solid #5d5757;
   padding: 2em 0;
   transform: rotate(45deg);
   display: inline-block;
@@ -131,12 +131,11 @@ img {
 }
 
 .game-over {
-  border-top: 4px solid red;
+  border-top: 4px solid #b5a2a2;
   height: 2px;
   width: 0;
-  /* transform: translateY(4.5em); */
-
-  transition: width 1s ease-in-out;
+  z-index: 2;
+  transition: width .5s ease-in-out;
 }
 .game-over.draw {
   width: 250px;

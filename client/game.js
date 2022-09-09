@@ -122,6 +122,7 @@ function getGameStatus() {
     if (winningSymbol) {
       result.winner = winningSymbol;
       result.isGameOver = true;
+      result.winningLine = ["d", "l"];
       return result;
     }
   }
@@ -131,6 +132,7 @@ function getGameStatus() {
     if (winningSymbol) {
       result.winner = winningSymbol;
       result.isGameOver = true;
+      result.winningLine = ["d", "r"];
       return result;
     }
   }
@@ -159,10 +161,25 @@ function showWinner(status) {
 
 function drawLine(status) {
   if (status.winner) {
+    // rows
     if (status.winningLine[0] == "r") {
-      console.log(`translateY(${ 4.5 + 6 * status.winningLine[1] }em)`)
-      gameOver.style.transform = 
-        `translateY(${ 4.5 + 6 * status.winningLine[1] }em)`;
+      gameOver.style.transform = `translateY(${
+        70 + 102 * status.winningLine[1]
+      }px)`;
+      gameOver.classList.add("draw");
+    }
+    // cols
+    if (status.winningLine[0] == "c") {
+      gameOver.style.transform = `translate(${
+        103 * (status.winningLine[1] - 1)
+      }px,172px) rotateZ(90deg)`;
+      gameOver.classList.add("draw");
+    }
+    // diagonal
+    if (status.winningLine[0] == "d") {
+      gameOver.style.transform = `translateY(172px) rotate(${
+        status.winningLine[1] == "r" ? "-" : ""
+      }45deg)`;
       gameOver.classList.add("draw");
     }
   }
